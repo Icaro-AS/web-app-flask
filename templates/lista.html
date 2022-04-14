@@ -14,18 +14,18 @@
             <thead class="thead-default">
                 <tr>
                     <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Console</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>O Senhor dos Anéis</td>
-                </tr>
-                <tr>
-                    <td>As crônicas de Narnia</td>
-                </tr>
-                <tr>
-                    <td>O século do nada</td>
-                </tr>
+                {% for livro in livros %}
+                    <tr>
+                        <td>{{ livro.nome }}</td>
+                        <td>{{ livro.categoria }}</td>
+                        <td>{{ livro.autor }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
