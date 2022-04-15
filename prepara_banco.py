@@ -31,9 +31,9 @@ cursor.execute("""create table if not exists usuario (
 cursor.executemany(
       'INSERT INTO livraria.usuario (id, nome, senha) VALUES (%s, %s, %s)',
       [
-            ('Batman', 'morcego', 'batmanwayne'),
-            ('Robin', 'Prodígio', 'garotobom'),
-            ('Batgirl', 'gatinha', 'amobatman')
+            ('Batman', 'Bruce Wayne', 'morcego'),
+            ('SuperMan', 'Clark Kent', 'super'),
+            ('MulherMaravilha', 'Diana', 'mara')
       ])
 
 cursor.execute('select * from livraria.usuario')
