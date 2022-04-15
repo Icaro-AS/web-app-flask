@@ -5,7 +5,9 @@
                 <tr>
                     <th>Nome</th>
                     <th>Categoria</th>
-                    <th>Console</th>
+                    <th>Autor</th>
+                    <th>*</th>
+                    <th>*</th>
                 </tr>
             </thead>
             <tbody>
@@ -14,8 +16,11 @@
                         <td>{{ livro.nome }}</td>
                         <td>{{ livro.categoria }}</td>
                         <td>{{ livro.autor }}</td>
+                        <td>  <a href = "{{ url_for('editar', id=livro.id) }}">Editar</a></td>
+                        <td>  <a href = "{{ url_for('deletar', id=livro.id) }}">Deletar</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <a class="btn btn-primary" href="{{ url_for('novo') }}">Cadastrar Livro</a>
 {% endblock %}
