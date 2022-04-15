@@ -40,19 +40,18 @@ def criar():
     return redirect(url_for('index'))
 
 
-
-@app.route('/editar')
-def editar():
-    if 'usuario_logado' not in session or session['usuario_logado'] == None:
-        return redirect(url_for('login', proxima=url_for('editar')))
-    return render_template('editar.html', titulo='Editar Livro')
-
 @app.route('/editar/<int:id>')
 def editar(id):
-    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+    if 'usuario_logado' not in session or session['usuario_logado'] is None:
         return redirect(url_for('login', proxima=url_for('editar')))
-    return render_template('editar.html', titulo='Alteração de Livro')
+    livro = livro_dao.busca_por_id(id)
+    return render_template('editar.html', titulo='Alteração de Livro', livro=livro)
 
+@app.route('/deletar /<int:id>')
+def deletar(id):
+    livro_dao.deletar(id)
+    flash('O livro foi removido com sucesso!')
+    return redirect(url_for('index'))
 
 
 @app.route('/login')
@@ -74,10 +73,22 @@ def autenticar():
         flash('Usuário não logado.')
         return redirect(url_for('login'))
 
+
+@app.route('/atualizar', methods=['POST'])
+def atualizar():
+    nome = request.form['nome']
+    categoria = request.form['categoria']
+    autor = request.form['autor']
+    livro = Livro(nome, categoria, autor, id=request.form["id"])
+    livro_dao.salvar(livro)
+    return redirect(url_for('index'))
+
+
 @app.route('/logout')
 def logout():
     session['usuario_logado'] = None
     flash('Logout efetuado com sucesso!')
     return redirect(url_for('index'))
+
 
 app.run(debug=True)
