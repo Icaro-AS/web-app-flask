@@ -7,7 +7,7 @@ class Livro:
 
 
 class Usuario:
-    def __init__(self, nome, nick, senha):
+    def __init__(self, id, nome, senha):
+        self.id = id
         self.nome = nome
-        self.nick = nick
         self.senha = senha
